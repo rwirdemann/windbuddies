@@ -1,0 +1,48 @@
+{% extends "surf/base.html" %}
+
+{% block content %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+                <a class="button is-ligth">
+                    Add session
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="box">
+    {% for s in latest_sessions %}
+    <article class="media">
+        <figure class="media-left">
+            <p class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+        </figure>
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <strong>{{ s.when }} {{ s.spot }}</strong>
+                    <br>
+                    Going: {{ s.planned }}
+                </p>
+            </div>
+            <nav class="level is-mobile">
+                <div class="level-left">
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+                    </a>
+                    <a class="level-item">
+                        <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="media-right">
+            <button class="delete"></button>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endblock %}
