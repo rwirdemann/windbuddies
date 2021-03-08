@@ -3,20 +3,6 @@
 {% load static %}
 
 {% block content %}
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-end">
-        <div class="navbar-item">
-            <div class="buttons">
-                <button class="button">
-                    <span class="icon">
-                        <i class="fa fa-plus"></i>
-                    </span>
-                    <span>Add Session</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</nav>
 <div class="box">
     {% for s in latest_sessions %}
     <article class="media">
@@ -36,7 +22,10 @@
         </div>
         <div class="media-right">
             <button class="button">
-                Join
+                <span class="icon">
+                    <i class="fas fa-user-friends"></i>
+                </span>
+                <span>Join</span>
             </button>
         </div>
     </article>
