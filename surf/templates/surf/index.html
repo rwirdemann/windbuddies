@@ -7,9 +7,12 @@
     <div class="navbar-end">
         <div class="navbar-item">
             <div class="buttons">
-                <a class="button is-ligth">
-                    Add session
-                </a>
+                <button class="button">
+                    <span class="icon">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                    <span>Add Session</span>
+                </button>
             </div>
         </div>
     </div>
@@ -19,7 +22,7 @@
     <article class="media">
         <figure class="media-left">
             <p class="image is-96x96">
-                <img src="{{ s.spot_image }}" alt="Spot"/>
+                <img src="{{ s.spot_image }}" alt="Spot" />
             </p>
         </figure>
         <div class="media-content">
@@ -30,19 +33,11 @@
                     Going: {{ s.planned }}
                 </p>
             </div>
-            <nav class="level is-mobile">
-                <div class="level-left">
-                    <a class="level-item">
-                        <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-                    </a>
-                    <a class="level-item">
-                        <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                    </a>
-                </div>
-            </nav>
         </div>
         <div class="media-right">
-            <button class="delete"></button>
+            <button class="button">
+                Join
+            </button>
         </div>
     </article>
     {% endfor %}
