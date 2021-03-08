@@ -31,4 +31,30 @@
     </article>
     {% endfor %}
 </div>
+
+<!-- Modal popup form to add a new session -->
+<form action="/surf/sessions/" method="post">
+    {% csrf_token %}
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Neue Session</p>
+                <button class="delete closeModal" aria-label="close"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                    <label class="label">Spot</label>
+                    <div class="control">
+                        <input id="spot" name="spot" class="input" type="text"
+                            placeholder="Dein Spot" required autofocus>
+                    </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Erstellen</button>
+            </footer>
+        </div>
+    </div>
+</form>
 {% endblock %}

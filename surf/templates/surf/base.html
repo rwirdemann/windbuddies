@@ -10,6 +10,20 @@
     <script src="https://kit.fontawesome.com/30b0219505.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'surf/style.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#showModal").click(function () {
+                $(".modal").addClass("is-active");
+                $("#spot").focus();
+            });
+
+            $(".closeModal").click(function () {
+                $(".modal").removeClass("is-active");
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -17,7 +31,7 @@
         <div class="hero-body">
             <h1 class="title is-1">Windbuddies</h1>
             <h2 class="subtitle">See you at the beach</h2>
-            <button class="button">
+            <button class="button" id="showModal">
                 <span class="icon">
                     <i class="fa fa-plus"></i>
                 </span>
