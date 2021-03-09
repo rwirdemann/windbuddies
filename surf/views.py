@@ -14,6 +14,6 @@ class IndexView(generic.ListView):
 
 def create_session(request):
     form = SessionForm(request.POST)
-    s = Session(spot=form.data['spot'])
+    s = Session(spot=form.data['spot'], when=form.data['when'])
     s.save() 
     return HttpResponseRedirect('/surf')
