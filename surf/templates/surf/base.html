@@ -7,43 +7,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Windbuddies</title>
-    <script src="https://kit.fontawesome.com/30b0219505.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'surf/style.css' %}">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#showModal").click(function () {
-                $(".modal").addClass("is-active");
-                $("#spot").focus();
-            });
-
-            $(".closeModal").click(function () {
-                $(".modal").removeClass("is-active");
-            });
-        });
-    </script>
 </head>
 
 <body>
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <h1 class="title is-1">Windbuddies</h1>
-            <h2 class="subtitle">See you at the beach</h2>
-            <button class="button" id="showModal">
-                <span class="icon">
-                    <i class="fa fa-plus"></i>
-                </span>
-                <span>Add Session</span>
-            </button>
-        </div>
-    </section>
-    <div class="columns">
-        <div class="column">
-            {% block content %}{% endblock %}
-        </div>
+    <div class="bg-light p-3">
+        <h1 class="display-4">Windbuddies</h1>
+        <p class="lead">See you at the beach</p>
+        <hr class="my-4">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Neue Session
+        </button>
     </div>
+    <div class="container m-3">    
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 
 </html>

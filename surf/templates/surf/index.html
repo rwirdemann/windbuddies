@@ -3,57 +3,50 @@
 {% load static %}
 
 {% block content %}
-<div class="box">
+<ul class="list-unstyled">
     {% for s in latest_sessions %}
-    <article class="media">
-        <figure class="media-left">
-            <p class="image is-96x96">
-                <img src="{{ s.spot_image }}" alt="Spot" />
-            </p>
-        </figure>
-        <div class="media-content">
-            <div class="content">
-                <p>
-                    <strong>{{ s.when }} {{ s.spot }}</strong>
-                    <br>
-                    Going: {{ s.planned }}
-                </p>
+    <li class="container mb-2">
+        <div class="d-flex">
+            <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:96px;height:96px;">
+            <div class="p-2">
+                <h5>{{ s.when }} {{ s.spot }}</h5>
+                <p>Going: {{ s.planned }}</p>
             </div>
         </div>
-        <div class="media-right">
-            <button class="button">
-                <span class="icon">
-                    <i class="fas fa-user-friends"></i>
-                </span>
-                <span>Join</span>
-            </button>
-        </div>
-    </article>
+    </li>
     {% endfor %}
-</div>
+</ul>
 
-<!-- Modal popup form to add a new session -->
 <form action="/surf/sessions/" method="post">
     {% csrf_token %}
-    <div class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title">Neue Session</p>
-                <button class="delete closeModal" aria-label="close"></button>
-            </header>
-            <section class="modal-card-body">
-                <div class="field">
-                    <label class="label">Spot</label>
-                    <div class="control">
-                        <input id="spot" name="spot" class="input" type="text"
-                            placeholder="Dein Spot" required autofocus>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Neue Session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="spot" class="form-label">Wo</label>
+                        <input id="spot" name="spot" class="form-control" type="text"
+                            placeholder="Dein Spot" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="when" class="form-label">Wann</label>
+                        <input class="form-control" type="date" id="when" name="when"
+                            value="2021-03-09" min="2018-01-01" max="2030-12-31">
                     </div>
                 </div>
-            </section>
-            <footer class="modal-card-foot">
-                <button class="button is-success">Erstellen</button>
-            </footer>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Abbrechen</button>
+                    <input type="submit" class="btn btn-primary" value="Erstellen">
+                </div>
+            </div>
         </div>
     </div>
 </form>
