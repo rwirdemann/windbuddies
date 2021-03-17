@@ -23,6 +23,13 @@ def create_session(request):
 
     return render(request, 'surf/session.html', {'form': form})
 
+def delete_session(request, session_id):
+    s = Session.objects.get(id=session_id)
+    if s is not None:        
+        s.delete()
+
+    return HttpResponseRedirect('/surf')
+
 
 def actual_weather(request):
     json = requests.get(

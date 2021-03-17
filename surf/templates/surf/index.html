@@ -11,8 +11,9 @@
             <h5>{{ s.when }} {{ s.spot }}</h5>
             <p>Going: {{ s.planned }}</p>
         </div>
-        <div class="">
-            <button type="button" class="btn btn-outline-primary btn-sm">Join</button>
+        <div>
+            <a href="/surf/sessions/delete/{{ s.id }}">Delete</a>&nbsp;
+            <button type="button" class="btn btn-outline-primary">Join</button>
         </div>
     </li>
     {% endfor %}
