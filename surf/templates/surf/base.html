@@ -14,18 +14,18 @@
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script>
-            $(function () {
-                $.ajax({
-                    url: "/surf/weather/",
-                    cache: false
-                })
-                .done(function (json) {
-                    $("#spot").text(json.spot)
-                    $("#timestamp").text(json.timestamp)
-                    $("#direction").text(json.direction)
-                    $("#speed").text(json.speed)
-                });
-            });
+            // $(function () {
+            //     $.ajax({
+            //         url: "/surf/weather/",
+            //         cache: false
+            //     })
+            //     .done(function (json) {
+            //         $("#spot").text(json.spot)
+            //         $("#timestamp").text(json.timestamp)
+            //         $("#direction").text(json.direction)
+            //         $("#speed").text(json.speed)
+            //     });
+            // });
     </script>
 </head>
 
@@ -33,7 +33,7 @@
     <div class="bg-light p-3">
         <div class="d-flex">
             <div class="flex-grow-1">
-                <h1 class="display-4">Windbuddies</h1>
+                <h1 class="display-4">Windcrawler</h1>
                 <p class="lead">See you at the beach</p>
             </div>
             <div>
@@ -45,9 +45,9 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Neue Session
-        </button>
+        <a href="/surf/sessions">
+            Neue Session...
+        </a>
     </div>
     <div class="container m-3">    
         {% block content %}{% endblock %}

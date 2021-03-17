@@ -1,0 +1,12 @@
+{% extends "surf/base.html" %}
+
+{% block content %}
+<div class="d-flex p-2">
+    <form action="/surf/sessions/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="/surf">Zurück</a>&nbsp;
+        <input type="submit" class="btn btn-primary" value="Erstellen">
+    </form>
+</div>
+{% endblock %}
