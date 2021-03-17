@@ -5,13 +5,14 @@
 {% block content %}
 <ul class="list-unstyled">
     {% for s in latest_sessions %}
-    <li class="container mb-2">
-        <div class="d-flex">
-            <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:96px;height:96px;">
-            <div class="p-2">
-                <h5>{{ s.when }} {{ s.spot }}</h5>
-                <p>Going: {{ s.planned }}</p>
-            </div>
+    <li class="d-flex mb-2">
+        <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:96px;height:96px;">
+        <div class="flex-grow-1 p-2">
+            <h5>{{ s.when }} {{ s.spot }}</h5>
+            <p>Going: {{ s.planned }}</p>
+        </div>
+        <div class="">
+            <button type="button" class="btn btn-outline-primary btn-sm">Join</button>
         </div>
     </li>
     {% endfor %}
