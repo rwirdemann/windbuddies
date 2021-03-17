@@ -11,13 +11,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'surf/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+            $(function () {
+                $.ajax({
+                    url: "/surf/weather/",
+                    cache: false
+                })
+                .done(function (json) {
+                    $("#spot").text(json.spot)
+                    $("#timestamp").text(json.timestamp)
+                    $("#direction").text(json.direction)
+                    $("#speed").text(json.speed)
+                });
+            });
+    </script>
 </head>
 
 <body>
     <div class="bg-light p-3">
-        <h1 class="display-4">Windbuddies</h1>
-        <p class="lead">See you at the beach</p>
-        <hr class="my-4">
+        <div class="d-flex">
+            <div class="flex-grow-1">
+                <h1 class="display-4">Windbuddies</h1>
+                <p class="lead">See you at the beach</p>
+            </div>
+            <div>
+                <strong id="spot">Kiel Leuchtturm</strong>
+                <div id="timestamp">17. März 2021, 11:33</div>
+                <div>
+                    <span id="direction">2 °, N</span>
+                    <span id="speed">4,30 m/s</span>
+                </div>
+            </div>
+        </div>
         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Neue Session
         </button>
