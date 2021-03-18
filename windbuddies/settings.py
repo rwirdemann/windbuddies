@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['95.217.222.60', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'surf.apps.SurfConfig',
+    'main.apps.MainConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,11 +1,11 @@
-{% extends "surf/base.html" %}
+{% extends "main/base.html" %}
 
 {% block content %}
 <div class="p-2">
-    <form action="/surf/sessions/" method="post">
+    <form action="/main/sessions/" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <a href="/surf">Zurück</a>&nbsp;
+        <a href="/main">Zurück</a>&nbsp;
         <input type="submit" class="btn btn-primary" value="Erstellen">
     </form>
 </div>

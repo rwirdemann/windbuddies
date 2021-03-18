@@ -1,4 +1,4 @@
-{% extends "surf/base.html" %}
+{% extends "main/base.html" %}
 
 {% load static %}
 
@@ -12,7 +12,7 @@
             <p>Going: {{ s.planned }}</p>
         </div>
         <div>
-            <a href="/surf/sessions/delete/{{ s.id }}">Delete</a>&nbsp;
+            <a href="{% url 'delete' s.id %}">Delete</a>&nbsp;
             <button type="button" class="btn btn-outline-primary">Join</button>
         </div>
     </li>
