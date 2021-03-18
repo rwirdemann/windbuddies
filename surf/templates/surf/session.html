@@ -1,7 +1,7 @@
 {% extends "surf/base.html" %}
 
 {% block content %}
-<div class="d-flex p-2">
+<div class="p-2">
     <form action="/surf/sessions/" method="post">
         {% csrf_token %}
         {{ form.as_p }}
