@@ -9,7 +9,7 @@
         <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:96px;height:96px;">
         <div class="flex-grow-1 p-2">
             <h5>{{ s.when }} {{ s.spot }}</h5>
-            <p>Going: {{ s.planned }}</p>
+            <p>Going: {{ s.riders.count }}</p>
         </div>
         <div>
             <a href="{% url 'delete' s.id %}">Delete</a>&nbsp;
