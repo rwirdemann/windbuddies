@@ -8,7 +8,7 @@ from .forms import SessionForm
 
 
 def index(request):
-    sessions = Session.objects.order_by('-when')[:8]
+    sessions = Session.objects.order_by('when')[:8]
     context = {'latest_sessions': sessions}
     return render(request, 'surf/index.html', context)
 
