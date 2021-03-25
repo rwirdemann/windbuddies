@@ -1,12 +1,28 @@
 {% extends "main/base.html" %}
+{% load extras %}
 
 {% block content %}
 <div class="p-2">
     <form action="/main/sessions/" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="mb-3">
+            <label for="spot" class="form-label">Wo</label>
+            {{ form.spot|addcss:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="when" class="form-label">Wann</label>
+            {{ form.when|addcss:"form-control" }}
+        </div>
         <a href="/main">Zurück</a>&nbsp;
         <input type="submit" class="btn btn-primary" value="Erstellen">
     </form>
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#id_when").datepicker();
+        $("#id_when").datepicker("option", "dateFormat", "dd.mm.yy");
+        $("#id_when").datepicker("option", "de-DE");
+    });
+</script>
 {% endblock %}

@@ -15,9 +15,7 @@ class SessionForm(ModelForm):
                                    'placeholder': 'Name des Spots',
                                    'class': 'form-control'
                                }))
-    when = forms.CharField(widget=forms.SelectDateWidget(),
-                           label='Wann',
-                           initial=django.utils.timezone.now())
+    when = forms.DateField(input_formats=['%d.%m.%Y'])
 
     class Meta:
         model = Session

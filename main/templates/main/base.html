@@ -11,8 +11,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
             // $(function () {
             //     $.ajax({
@@ -26,6 +28,29 @@
             //         $("#speed").text(json.speed)
             //     });
             // });
+
+                jQuery(function ($) {
+                    $.datepicker.regional['de'] = {
+                        clearText: 'löschen', clearStatus: 'aktuelles Datum löschen',
+                        closeText: 'schließen', closeStatus: 'ohne Änderungen schließen',
+                        prevText: '<zurück', prevStatus: 'letzten Monat zeigen',
+                        nextText: 'Vor>', nextStatus: 'nächsten Monat zeigen',
+                        currentText: 'heute', currentStatus: '',
+                        monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni',
+                            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+                        monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+                        monthStatus: 'anderen Monat anzeigen', yearStatus: 'anderes Jahr anzeigen',
+                        weekHeader: 'Wo', weekStatus: 'Woche des Monats',
+                        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+                        dayNamesShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                        dayNamesMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+                        dayStatus: 'Setze DD als ersten Wochentag', dateStatus: 'Wähle D, M d',
+                        dateFormat: 'dd.mm.yy', firstDay: 1,
+                        initStatus: 'Wähle ein Datum', isRTL: false
+                    };
+                    $.datepicker.setDefaults($.datepicker.regional['de']);
+                });
     </script>
 </head>
 
