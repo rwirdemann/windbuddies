@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% load extras %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Dein Windbuddies-Name</label>
+        {{ form.username|addcss:"form-control" }}
+        {% if form.errors.username %}
+            <div class="form-text text-danger">
+                Wähle einen gültigen Namen, bestehend aus Buchstaben und Zahlen.
+            </div>
+        {% else %}
+            <div class="form-text">Dein Windbuddies-Name kann Dein Vorname oder ein Fantasiename sein.</div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        <label for="password1" class="form-label">Passwort</label>
+        {{ form.password1|addcss:"form-control" }}
+        <div class="form-text">Merke Dir Dein Passwort gut. Es gibt keine Möglichkeit des Resets.</div>
+    </div>
+    <div class="mb-3">
+        <label for="password2" class="form-label">Wiederhole das Passwort</label>
+        {{ form.password2|addcss:"form-control" }}
+        {% if form.errors.password2 %}
+            <div class="form-text text-danger">
+                Deine beiden Passwörter stimmen nicht überein.
+            </div>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Registrieren</button>
+</form>
+{% endblock content %}
