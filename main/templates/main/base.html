@@ -33,7 +33,7 @@
     <div class="bg-light p-3">
         <div class="d-flex">
             <div class="flex-grow-1">
-                <h1 class="display-4">Windbuddies</h1>
+                <h1 class="display-4"><a href="{% url 'index' %}">Windbuddies</a></h1>
                 <p class="lead">See you at the beach</p>
             </div>
             <div>
@@ -45,9 +45,22 @@
                 </div>
             </div>
         </div>
-        <a href="{% url 'create' %}">
-            Neue Session...
-        </a>
+        <div class="d-flex">
+            <div class="flex-grow-1">
+                <a href="{% url 'create' %}">
+                    Neue Session...
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'login' %}">
+                    Sign in
+                </a>
+                &nbsp;|
+                <a href="{% url 'create' %}">
+                    Sign up
+                </a>
+            </div>
+        </div>
     </div>
 
     <main class="flex-shrink-0">
