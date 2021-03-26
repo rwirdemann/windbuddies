@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.contrib.staticfiles import finders
 import django.utils.timezone
 
 
@@ -11,7 +12,10 @@ class Session(models.Model):
     owner = models.ForeignKey(User, related_name='owner', on_delete=models.DO_NOTHING)
 
     def spot_image(self):
-        return '/static/main/' + self.spot.replace(' ', '').lower() + '.png'
+        img = 'main/' + self.spot.replace(' ', '').lower() + '.png'
+        if finders.find(img) is not None:
+            return '/static/' + img
+        return '/static/main/default.png'
 
     def rider_names(self):
         names = map(lambda r: r.username, self.riders.all())
