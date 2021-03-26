@@ -1,20 +1,21 @@
 {% extends "main/base.html" %}
 {% load extras %}
-
+{% load i18n %}
 {% load static %}
 
 {% block content %}
 <ul class="list-unstyled">
     {% for s in latest_sessions %}
     <li class="d-flex mb-2">
-        <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:96px;height:96px;">
+        <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:80px;height:80px;">
         <div class="flex-grow-1 p-2">
-            <h5>{{ s.when|date:'l d. F Y' }} {{ s.spot }}</h5>
+            <strong>{{ s.spot }}</strong> 
+            {{ s.when|date:'l d. F Y' }}
             <p>Going: {{ s.riders.count }}</p>
         </div>
         <div>
-            <a href="{% url 'delete' s.id %}">Delete</a>&nbsp;
-            <button type="button" class="btn btn-outline-primary">Join</button>
+            <a href="{% url 'delete' s.id %}">{% trans 'delete' %}</a>&nbsp;
+            <button type="button" class="btn btn-outline-primary">{% trans 'join' %}</button>
         </div>
     </li>
     {% endfor %}
