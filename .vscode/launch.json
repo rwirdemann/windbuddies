@@ -9,6 +9,9 @@
             "args": [
                 "runserver"
             ],
+            "env": {
+                "SECRET_KEY":"g92c5%m7c$7j66!@$6aj=1v%1fpcje-mpqlzcch0)1d@0b&vdt"
+            },
             "django": true
         }
     ]

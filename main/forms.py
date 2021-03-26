@@ -1,7 +1,6 @@
 from django.forms import ModelForm
 from .models import Session
 from django import forms
-import django.utils.timezone
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -19,7 +18,7 @@ class SessionForm(ModelForm):
 
     class Meta:
         model = Session
-        fields = ['spot', 'when']
+        fields = ['spot', 'when']        
 
 
 class SignUpForm(UserCreationForm):

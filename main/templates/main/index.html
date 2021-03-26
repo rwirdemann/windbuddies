@@ -11,10 +11,12 @@
         <div class="flex-grow-1 p-2">
             <strong>{{ s.spot }}</strong> 
             {{ s.when|date:'l d. F Y' }}
-            <p>Going: {{ s.riders.count }}</p>
+            <p>Surfer: {{ s.rider_names }}</p>
         </div>
         <div>
-            <a href="{% url 'delete' s.id %}">{% trans 'delete' %}</a>&nbsp;
+            {% if user|can_delete:s %}
+                <a href="{% url 'delete' s.id %}">{% trans 'delete' %}</a>&nbsp;
+            {% endif %}
             <button type="button" class="btn btn-outline-primary">{% trans 'join' %}</button>
         </div>
     </li>

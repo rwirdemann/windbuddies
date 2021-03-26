@@ -16,7 +16,10 @@ def index(request):
 def create(request):
     if request.method == 'POST':
         f = SessionForm(request.POST)
-        f.save()
+        f.instance.owner = request.user
+        session = f.save()
+        session.riders.add(request.user)
+        session.save()
         return HttpResponseRedirect('/main')
     else:
         form = SessionForm()
