@@ -17,7 +17,11 @@
             {% if user|can_delete:s %}
                 <a href="{% url 'delete' s.id %}">{% trans 'delete' %}</a>&nbsp;
             {% endif %}
-            <button type="button" class="btn btn-outline-primary">{% trans 'join' %}</button>
+            {% if user|is_member:s %}
+                <a class="btn btn-outline-primary"href="{% url 'unjoin' s.id %}">{% trans 'unjoin' %}</a>&nbsp;
+            {% else %}
+                <a class="btn btn-outline-primary"href="{% url 'join' s.id %}">{% trans 'join' %}</a>&nbsp;
+            {% endif %}
         </div>
     </li>
     {% endfor %}

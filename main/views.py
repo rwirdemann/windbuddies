@@ -34,6 +34,17 @@ def delete_session(request, session_id):
 
     return HttpResponseRedirect('/main')
 
+def join_session(request, session_id):
+    s = Session.objects.get(id=session_id)
+    s.riders.add(request.user)
+    s.save()
+    return HttpResponseRedirect('/main')
+
+def unjoin_session(request, session_id):
+    s = Session.objects.get(id=session_id)
+    s.riders.remove(request.user)
+    s.save()
+    return HttpResponseRedirect('/main')
 
 def actual_weather(request):
     json = requests.get(
