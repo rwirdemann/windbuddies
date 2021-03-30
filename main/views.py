@@ -51,6 +51,9 @@ def actual_weather(request):
         'https://9nehnu4h6h.execute-api.us-east-1.amazonaws.com/stage/').text
     return HttpResponse(json, content_type='application/json')
 
+def forecast(request):
+    b = requests.get( 'http://metoc.fcoo.dk/webapi/plot/timeseries?p=Wind&x=10.59&y=54.22').text
+    return HttpResponse(b, content_type='application/png')
 
 def signup(request):
     if request.method == 'POST':

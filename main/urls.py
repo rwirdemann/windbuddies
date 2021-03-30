@@ -15,5 +15,6 @@ urlpatterns = [
          views.delete_session,
          name='delete'),
     path('weather/', views.actual_weather, name='actual_weather'),
+    path('forecast/', views.forecast, name='forecast'),
     path('signup/', views.signup, name='signup'),
 ]

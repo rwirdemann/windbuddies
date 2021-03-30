@@ -7,23 +7,62 @@
 <ul class="list-unstyled">
     {% for s in latest_sessions %}
     <li class="d-flex mb-2">
-        <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:80px;height:80px;">
+        <img src="{{ s.spot_image }}" alt="Spot" class="mr-3" style="width:96px;height:96px;">
         <div class="flex-grow-1 p-2">
-            <strong>{{ s.spot }}</strong> 
+            <strong>{{ s.spot }}</strong>
             {{ s.when|date:'l d. F Y' }}
-            <p>Surfer: {{ s.rider_names }}</p>
+            <p>
+                <a class="forecast" href="javascript:void(0)" data-x="10.59" data-y="54.22">48h Forecast</a>
+                </br>
+                Surfer: {{ s.rider_names }}
+            </p>
         </div>
         <div>
             {% if user|can_delete:s %}
                 <a href="{% url 'delete' s.id %}">{% trans 'delete' %}</a>&nbsp;
             {% endif %}
             {% if user|is_member:s %}
-                <a class="btn btn-outline-primary"href="{% url 'unjoin' s.id %}">{% trans 'unjoin' %}</a>&nbsp;
+                <a class="btn btn-outline-primary" href="{% url 'unjoin' s.id %}">{% trans 'unjoin' %}</a>&nbsp;
             {% else %}
-                <a class="btn btn-outline-primary"href="{% url 'join' s.id %}">{% trans 'join' %}</a>&nbsp;
+                <a class="btn btn-outline-primary" href="{% url 'join' s.id %}">{% trans 'join' %}</a>&nbsp;
             {% endif %}
         </div>
     </li>
     {% endfor %}
 </ul>
+<div class="modal" id="forecast" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Der Däne</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="plot" style="display: none;">
+                <div class="d-flex justify-content-center">
+                    <div id="spinner" class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".forecast").click(function () {
+            x = $(this).attr('data-x')
+            y = $(this).attr('data-y')
+            var url = `http://metoc.fcoo.dk/webapi/plot/timeseries?p=Wind&x=${x}&y=${y}`
+            var m = new bootstrap.Modal(document.getElementById('forecast'), {})            
+            m.show();
+            $('#plot').attr('src', url).on("load", function() {
+                $('#spinner').hide();
+                $('#plot').show();
+            });  
+
+
+        });
+    })
+</script>
 {% endblock %}

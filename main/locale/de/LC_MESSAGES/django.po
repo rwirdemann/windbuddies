@@ -28,4 +28,4 @@ msgstr "Bin dabei"
 
 #: templates/main/index.html:21
 msgid "unjoin"
-msgstr "Bin nicht dabei"
+msgstr "Bin raus"
