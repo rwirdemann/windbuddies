@@ -4,15 +4,24 @@ from django.contrib.staticfiles import finders
 import django.utils.timezone
 
 
+class Spot(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Session(models.Model):
     when = models.DateField('when', default=django.utils.timezone.now)
-    spot = models.CharField(max_length=100)
     planned = models.IntegerField(default=0)
     riders = models.ManyToManyField(User)
-    owner = models.ForeignKey(User, related_name='owner', on_delete=models.DO_NOTHING)
+    owner = models.ForeignKey(User,
+                              related_name='owner',
+                              on_delete=models.DO_NOTHING)
+    spot = models.ForeignKey(Spot, on_delete=models.DO_NOTHING)
 
     def spot_image(self):
-        img = 'main/' + self.spot.replace(' ', '').lower() + '.png'
+        img = 'main/' + self.spot.name.replace(' ', '').lower() + '.png'
         if finders.find(img) is not None:
             return '/static/' + img
         return '/static/main/default.png'
@@ -23,4 +32,4 @@ class Session(models.Model):
 
     def __str__(self):
         return '%s: %s Riders: %d' % (self.when.strftime("%d.%m.%Y"),
-                                      self.spot, self.riders.count())
+                                      self.spot.name, self.riders.count())

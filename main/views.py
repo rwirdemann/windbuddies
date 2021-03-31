@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
 import requests
-from .models import Session
+from .models import Session, Spot
 from .forms import SessionForm, SignUpForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -15,9 +15,11 @@ def index(request):
 
 def create(request):
     if request.method == 'POST':
-        f = SessionForm(request.POST)
-        f.instance.owner = request.user
-        session = f.save()
+        session = SessionForm(request.POST).instance
+        spot, _ = Spot.objects.get_or_create(name=request.POST.get('spot'))
+        session.spot = spot
+        session.owner = request.user
+        session.save()
         session.riders.add(request.user)
         session.save()
         return HttpResponseRedirect('/main')
@@ -34,11 +36,13 @@ def delete_session(request, session_id):
 
     return HttpResponseRedirect('/main')
 
+
 def join_session(request, session_id):
     s = Session.objects.get(id=session_id)
     s.riders.add(request.user)
     s.save()
     return HttpResponseRedirect('/main')
+
 
 def unjoin_session(request, session_id):
     s = Session.objects.get(id=session_id)
@@ -46,14 +50,19 @@ def unjoin_session(request, session_id):
     s.save()
     return HttpResponseRedirect('/main')
 
+
 def actual_weather(request):
     json = requests.get(
         'https://9nehnu4h6h.execute-api.us-east-1.amazonaws.com/stage/').text
     return HttpResponse(json, content_type='application/json')
 
+
 def forecast(request):
-    b = requests.get( 'http://metoc.fcoo.dk/webapi/plot/timeseries?p=Wind&x=10.59&y=54.22').text
+    b = requests.get(
+        'http://metoc.fcoo.dk/webapi/plot/timeseries?p=Wind&x=10.59&y=54.22'
+    ).text
     return HttpResponse(b, content_type='application/png')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -71,13 +80,11 @@ def signup(request):
             )
             return redirect('index')
     else:
-        m = ("Windbuddies setzt auf Datensparsamkeit. Wir wollen so wenig wie möglich von Dir wissen "
-             "und beschränken uns deshalb auf Name und Passwort. Wählst Du einen Fantasienamen, dann nutzt "
-             "Du Windbuddies quasi annonym. Nur Deine Freunde wissen wer du bist, weil Du ihnen "
-             "Deinen Windbuddies-Namen am Strand verraten hast.")
-        messages.success(
-            request,
-            m
-        )
+        m = (
+            "Windbuddies setzt auf Datensparsamkeit. Wir wollen so wenig wie möglich von Dir wissen "
+            "und beschränken uns deshalb auf Name und Passwort. Wählst Du einen Fantasienamen, dann nutzt "
+            "Du Windbuddies quasi annonym. Nur Deine Freunde wissen wer du bist, weil Du ihnen "
+            "Deinen Windbuddies-Namen am Strand verraten hast.")
+        messages.success(request, m)
         form = SignUpForm()
     return render(request, 'main/signup.html', {'form': form})
