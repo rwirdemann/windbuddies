@@ -5,16 +5,24 @@
 <div class="p-2">
     <form action="/main/sessions/" method="post">
         {% csrf_token %}
-        <div class="mb-3">
-            <label for="spot" class="form-label">Wo</label>
-            {{ form.spot|addcss:"form-control" }}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form.spot|addcss:"form-select" }}
+            </div>
+            <div class="col">
+                <a class="btn btn-link">Neuen Spot zufügen...</a>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="when" class="form-label">Wann</label>
-            {{ form.when|addcss:"form-control" }}
+        <div class="row mb-3">
+            <div class="col">
+                {{ form.when|addcss:"form-control" }}
+            </div>
+            <div class="col">
+            </div>
         </div>
-        <a href="/main">Zurück</a>&nbsp;
-        <input type="submit" class="btn btn-primary" value="Erstellen">
+    
+    <a href="/main">Zurück</a>&nbsp;
+    <input type="submit" class="btn btn-primary" value="Erstellen">
     </form>
 </div>
 

@@ -6,12 +6,15 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class SessionForm(ModelForm):
-    spot = forms.ModelChoiceField(
-        queryset=Spot.objects.all(),
-        empty_label="Wähle deinen Spot...",
-        required=True
-    )
-    when = forms.DateField(input_formats=['%d.%m.%Y'])
+    spot = forms.ModelChoiceField(queryset=Spot.objects.all(),
+                                  empty_label="Wähle deinen Spot...",
+                                  required=True)
+    when = forms.DateField(
+        input_formats=['%d.%m.%Y'],
+        widget=forms.TextInput(attrs={
+            'class': "form-control",
+            'placeholder': "Wann geht's los?"
+        }))
 
     class Meta:
         model = Session
