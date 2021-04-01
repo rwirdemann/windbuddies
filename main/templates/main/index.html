@@ -12,7 +12,7 @@
             <strong>{{ s.spot }}</strong>
             {{ s.when|date:'l d. F Y' }}
             <p>
-                <a class="forecast" href="javascript:void(0)" data-x="10.59" data-y="54.22">48h Forecast</a>
+                <a class="forecast" href="javascript:void(0)" data-x="{{ s.spot.x_str }}" data-y="{{ s.spot.y_str }}">48h Forecast</a>
                 </br>
                 Surfer: {{ s.rider_names }}
             </p>

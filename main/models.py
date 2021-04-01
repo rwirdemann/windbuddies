@@ -6,6 +6,14 @@ import django.utils.timezone
 
 class Spot(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    x = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+    y = models.DecimalField(max_digits=7, decimal_places=2, default=0)
+
+    def x_str(self):
+        return str(self.x).replace(',', '.')
+
+    def y_str(self):
+        return str(self.y).replace(',', '.')
 
     def __str__(self):
         return self.name
