@@ -5,6 +5,7 @@ from .models import Session, Spot
 from .forms import SessionForm, SignUpForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -13,6 +14,7 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 
+@login_required(login_url='/accounts/login/')
 def create(request):
     if request.method == 'POST':
         form = SessionForm(request.POST)
@@ -35,6 +37,7 @@ def delete_session(request, session_id):
     return HttpResponseRedirect('/main')
 
 
+@login_required(login_url='/accounts/login/')
 def join_session(request, session_id):
     s = Session.objects.get(id=session_id)
     s.riders.add(request.user)
@@ -42,6 +45,7 @@ def join_session(request, session_id):
     return HttpResponseRedirect('/main')
 
 
+@login_required(login_url='/accounts/login/')
 def unjoin_session(request, session_id):
     s = Session.objects.get(id=session_id)
     s.riders.remove(request.user)
