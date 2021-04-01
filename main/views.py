@@ -15,11 +15,9 @@ def index(request):
 
 def create(request):
     if request.method == 'POST':
-        session = SessionForm(request.POST).instance
-        spot, _ = Spot.objects.get_or_create(name=request.POST.get('spot'))
-        session.spot = spot
-        session.owner = request.user
-        session.save()
+        form = SessionForm(request.POST)
+        form.instance.owner = request.user
+        session = form.save()
         session.riders.add(request.user)
         session.save()
         return HttpResponseRedirect('/main')
