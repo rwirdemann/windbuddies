@@ -6,6 +6,7 @@ import django.utils.timezone
 
 class Spot(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    windfinder_id = models.CharField(max_length=100, default="")
     x = models.DecimalField(max_digits=7, decimal_places=2, default=0)
     y = models.DecimalField(max_digits=7, decimal_places=2, default=0)
 

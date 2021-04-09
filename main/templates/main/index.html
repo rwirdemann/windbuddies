@@ -12,7 +12,8 @@
             <strong>{{ s.spot }}</strong>
             {{ s.when|date:'l d. F Y' }}
             <p>
-                <a class="dmi-link" href="javascript:void(0)" data-spot="{{ s.spot.name }}" data-x="{{ s.spot.x_str }}" data-y="{{ s.spot.y_str }}">DMI 48h</a>
+                <a class="windfinder-link" href="javascript:void(0)" data-spot="{{ s.spot.name }}" data-windfinder-id="{{ s.spot.windfinder_id }}">Windfinder</a> |
+                <a class="dmi-link" href="javascript:void(0)" data-spot="{{ s.spot.name }}" data-x="{{ s.spot.x_str }}" data-y="{{ s.spot.y_str }}">DMI</a>
                 </br>
                 Surfer: {{ s.rider_names }}
             </p>
@@ -30,8 +31,8 @@
     </li>
     {% endfor %}
 </ul>
-<div class="modal" id="forecast" tabindex="-1">
-    <div class="modal-dialog">
+<div class="modal" id="dmi" tabindex="-1">
+    <div class="modal-dialog modal-dialog-dmi">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="spot-name"></h5>
@@ -48,19 +49,41 @@
         </div>
     </div>
 </div>
+<div class="modal" id="windfinder" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="windfinder-spot-name"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="windfinder-body"></div>
+        </div>
+    </div>
+</div>
 <script>
     $(function () {
         $(".dmi-link").click(function () {
             x = $(this).attr('data-x')
             y = $(this).attr('data-y')
             var url = `http://metoc.fcoo.dk/webapi/plot/timeseries?p=Wind&x=${x}&y=${y}`
-            var m = new bootstrap.Modal(document.getElementById('forecast'), {})            
+            var m = new bootstrap.Modal(document.getElementById('dmi'), {})            
             document.getElementById('spot-name').innerHTML = $(this).attr('data-spot')
             m.show();
             $('#plot').attr('src', url).on("load", function() {
                 $('#spinner').hide();
                 $('#plot').show();
             });  
+        });
+        $(".windfinder-link").click(function () {
+            document.getElementById('windfinder-spot-name').innerHTML = $(this).attr('data-spot')
+            body = document.getElementById('windfinder-body');
+            var js = document.createElement('script');
+            windfinder_id = $(this).attr('data-windfinder-id')
+            js.src = src="https://www.windfinder.com/widget/forecast/js/" + windfinder_id + "?unit_wave=m&unit_rain=mm&unit_temperature=c&unit_wind=kts&days=2&show_day=1"
+            body.innerHTML = ''
+            body.appendChild(js)
+            var m = new bootstrap.Modal(document.getElementById('windfinder'), {})            
+            m.show();
         });
     })
 </script>
