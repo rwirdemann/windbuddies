@@ -12,7 +12,7 @@
             <strong>{{ s.spot }}</strong>
             {{ s.when|date:'l d. F Y' }}
             <p>
-                <a class="forecast" href="javascript:void(0)" data-x="{{ s.spot.x_str }}" data-y="{{ s.spot.y_str }}">48h Forecast</a>
+                <a class="dmi-link" href="javascript:void(0)" data-spot="{{ s.spot.name }}" data-x="{{ s.spot.x_str }}" data-y="{{ s.spot.y_str }}">DMI 48h</a>
                 </br>
                 Surfer: {{ s.rider_names }}
             </p>
@@ -34,7 +34,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Der Däne</h5>
+                <h5 class="modal-title" id="spot-name"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -50,18 +50,17 @@
 </div>
 <script>
     $(function () {
-        $(".forecast").click(function () {
+        $(".dmi-link").click(function () {
             x = $(this).attr('data-x')
             y = $(this).attr('data-y')
             var url = `http://metoc.fcoo.dk/webapi/plot/timeseries?p=Wind&x=${x}&y=${y}`
             var m = new bootstrap.Modal(document.getElementById('forecast'), {})            
+            document.getElementById('spot-name').innerHTML = $(this).attr('data-spot')
             m.show();
             $('#plot').attr('src', url).on("load", function() {
                 $('#spinner').hide();
                 $('#plot').show();
             });  
-
-
         });
     })
 </script>
