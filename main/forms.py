@@ -27,9 +27,19 @@ class SpotForm(ModelForm):
         'placeholder': "Name des Spots"
     }))
 
+    y = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "Latitude, z.B. 54,52"
+    }))
+
+    x = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "Longitude, z.B. 11,05"
+    }))
+
     class Meta:
         model = Spot
-        fields = ['name']
+        fields = ['name', 'y', 'x']
 
 
 class SignUpForm(UserCreationForm):
