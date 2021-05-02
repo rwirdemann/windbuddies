@@ -21,6 +21,17 @@ class SessionForm(ModelForm):
         fields = ['spot', 'when']
 
 
+class SpotForm(ModelForm):
+    name = forms.CharField(required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "Name des Spots"
+    }))
+
+    class Meta:
+        model = Spot
+        fields = ['name']
+
+
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User

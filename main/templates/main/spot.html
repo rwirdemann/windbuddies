@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% load extras %}
+
+{% block content %}
+    <div class="p-2">
+        <form action="/main/spots/" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col">
+                    {{ form.name }}
+                </div>
+            </div>
+
+            <a href="/main/sessions">Zurück</a>&nbsp;
+            <input type="submit" class="btn btn-primary" value="Erstellen">
+        </form>
+    </div>
+{% endblock %}

@@ -1,11 +1,12 @@
+import requests
+from django.contrib import messages
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render, redirect
-import requests
-from .models import Session, Spot
-from .forms import SessionForm, SignUpForm
-from django.contrib.auth import login, authenticate
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+
+from .forms import SessionForm, SignUpForm, SpotForm
+from .models import Session
 
 
 def index(request):
@@ -27,6 +28,17 @@ def create(request):
         form = SessionForm()
 
     return render(request, 'main/session.html', {'form': form})
+
+
+@login_required(login_url='/accounts/login/')
+def create_spot(request):
+    if request.method == 'POST':
+        SpotForm(request.POST).save()
+        return HttpResponseRedirect('/main/sessions')
+    else:
+        form = SpotForm()
+        
+    return render(request, 'main/spot.html', {'form': form})
 
 
 def delete_session(request, session_id):
